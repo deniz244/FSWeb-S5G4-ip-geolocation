@@ -31,8 +31,8 @@ async function ipAdresimiAl() {
 */
 
 axios
-  .get("https://apis.ergineer.com/ipgeoapi/217.131.107.79")
-  .then((response) => response.data)
+  .get("https://apis.ergineer.com/ipgeoapi/" + benimIP)
+  .then((res) => res.data)
   .catch((err) => console.log(err));
 
 /*
@@ -70,6 +70,34 @@ function ulke() {
 
   const ip = document.createElement("h3");
   ip.classList.add("ip");
+
+  const ulke = document.createElement("p");
+  ulke.classList.add("ulke");
+
+  const enBoy = documnet.createElement("p");
+  enBoy.textContent = "Enlem: " + "Boylam: ";
+
+  const sehir = document.createElement("p");
+  sehir.textContent = "Şehir: ";
+
+  const saat = document.createElement("p");
+  saat.textConent = "Saat dilimi: ";
+
+  const para = document.createElement("p");
+  para.textContent = "Para birimi: ";
+
+  const isp = document.createElement("p");
+  isp.textContent = "";
+
+  card.appendChild(img);
+  card.appendChild(ci);
+  card.appendChild(ip);
+  ci.appendChild(ulke);
+  ci.appendChild(enBoy);
+  ci.appendChild(sehir);
+  ci.appendChild(saat);
+  ci.appendChild(para);
+  ci.appendChild(isp);
 }
 
 /*
