@@ -30,11 +30,6 @@ async function ipAdresimiAl() {
 	ADIM 5'e gelene kadar fonksiyonunuzu test etmek için ip nizi URL'ye manuel olarak ekleyebilirsiniz.
 */
 
-axios
-  .get("https://apis.ergineer.com/ipgeoapi/" + benimIP)
-  .then((res) => res.data)
-  .catch((err) => console.log(err));
-
 /*
 	ADIM 2: Geri döndürülen verileri inceleyin, bu sizin ip bilgileriniz! Bileşen fonksiyonunuzu geliştirmek içindeki bu veri yapısını
 	iyice anlamanız gerekmektedir.
@@ -58,48 +53,6 @@ axios
     </div>
 */
 
-function ulke() {
-  const card = document.createElement("div");
-  card.classList.add("card");
-
-  const img = document.createElement("img");
-  img.src = "";
-
-  const ci = document.createElement("div");
-  ci.classList.add("card-info");
-
-  const ip = document.createElement("h3");
-  ip.classList.add("ip");
-
-  const ulke = document.createElement("p");
-  ulke.classList.add("ulke");
-
-  const enBoy = documnet.createElement("p");
-  enBoy.textContent = "Enlem: " + "Boylam: ";
-
-  const sehir = document.createElement("p");
-  sehir.textContent = "Şehir: ";
-
-  const saat = document.createElement("p");
-  saat.textConent = "Saat dilimi: ";
-
-  const para = document.createElement("p");
-  para.textContent = "Para birimi: ";
-
-  const isp = document.createElement("p");
-  isp.textContent = "";
-
-  card.appendChild(img);
-  card.appendChild(ci);
-  card.appendChild(ip);
-  ci.appendChild(ulke);
-  ci.appendChild(enBoy);
-  ci.appendChild(sehir);
-  ci.appendChild(saat);
-  ci.appendChild(para);
-  ci.appendChild(isp);
-}
-
 /*
 	ADIM 4: API'den alınan verileri kullanarak ADIM 3'te verilen yapıda bir kart oluşturun ve 
 	bu kartı DOM olarak .cards elementinin içine ekleyin. 
@@ -114,3 +67,22 @@ function ulke() {
 */
 
 //kodlar buraya gelecek
+
+const kendiIPm = "217.131.107.79";
+
+const cardsContainer = document.querySelector(".cards");
+
+const htmlCard = `<div class="card">
+<img src={ülke bayrağı url} />
+<div class="card-info">
+	<h3 class="ip">{ip adresi}</h3>
+	<p class="ulke">{ülke bilgisi (ülke kodu)}</p>
+	<p>Enlem: {enlem} Boylam: {boylam}</p>
+	<p>Şehir: {şehir}</p>
+	<p>Saat dilimi: {saat dilimi}</p>
+	<p>Para birimi: {para birimi}</p>
+	<p>ISP: {isp}</p>
+</div>
+</div>`;
+
+cardsContainer.innerHTML = htmlCard;
