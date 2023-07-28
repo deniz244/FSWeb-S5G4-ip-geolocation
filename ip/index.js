@@ -68,21 +68,50 @@ async function ipAdresimiAl() {
 
 //kodlar buraya gelecek
 
-const kendiIPm = "217.131.107.79";
-
 const cardsContainer = document.querySelector(".cards");
 
-const htmlCard = `<div class="card">
-<img src={ülke bayrağı url} />
-<div class="card-info">
-	<h3 class="ip">{ip adresi}</h3>
-	<p class="ulke">{ülke bilgisi (ülke kodu)}</p>
-	<p>Enlem: {enlem} Boylam: {boylam}</p>
-	<p>Şehir: {şehir}</p>
-	<p>Saat dilimi: {saat dilimi}</p>
-	<p>Para birimi: {para birimi}</p>
-	<p>ISP: {isp}</p>
-</div>
-</div>`;
+function cardCreator(cardInfo) {
+  const htmlCard = `<div class="card">
+	<img src= "${cardInfo["ülkebayrağı"]}" />
+	<div class="card-info">
+		<h3 class="ip">${cardInfo["sorgu"]}</h3>
+		<p class="ulke">${cardInfo["ülkeKodu"]}</p>
+		<p>Enlem: ${cardInfo.enlem}Boylam: ${cardInfo.enlem}</p>
+		<p>Şehir: ${cardInfo["şehir"]}</p>
+		<p>Saat dilimi: ${cardInfo.saatdilimi}</p>
+		<p>Para birimi: ${cardInfo.parabirimi}</p>
+		<p>ISP: ${cardInfo.isp}</p>
+	</div>
+	</div>`;
 
-cardsContainer.innerHTML = htmlCard;
+  return htmlCard;
+}
+
+let myInfoObj = {};
+console.log("myInfoObj 1", myInfoObj);
+
+async function lokasyonBilgilerimiAl(ipAdd) {
+  await axios
+    .get(`https://apis.ergineer.com/ipgeoapi/${ipAdd}`)
+    .then(function (response) {
+      // handle success
+      //console.log(response.data);
+      myInfoObj = response.data;
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    })
+    .finally(function () {
+      // always executed
+      console.log("myInfoObj 2", myInfoObj);
+      cardsContainer.innerHTML = cardCreator(myInfoObj);
+    });
+}
+
+const initAPICycle = async () => {
+  await ipAdresimiAl();
+  lokasyonBilgilerimiAl(benimIP);
+};
+
+initAPICycle();
